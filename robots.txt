@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://https://deika79.github.io/Portfolio/sitemap.xml
