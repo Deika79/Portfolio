@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David García - Full Stack Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<script>
+  window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".navbar");
+    if (window.scrollY > 20) {
+      navbar.classList.add("sticky");
+    } else {
+      navbar.classList.remove("sticky");
+    }
+  });
+</script>
+
+<body>
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">David García</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero container">
+    <img src="avatar.png" alt="Avatar" class="avatar" />
+    <div class="hero-text">
+      <h1>Hi, I'm John Doe</h1>
+      <p>Full Stack Web Developer</p>
+      <a href="#projects" class="btn-primary">View Projects</a>
+    </div>
+  </section>
+
+  <section id="about" class="section container">
+    <h2>About Me</h2>
+    <p>
+      I am a physicist and mathematics teacher with a deep passion for technology and innovation. With a strong analytical background and problem-solving skills developed through my academic and teaching experience, I have successfully transitioned into fullstack web development. I thrive in dynamic environments where creativity meets logic, constantly seeking to build efficient, scalable, and user-centered digital solutions.
+My multidisciplinary expertise allows me to approach development challenges from unique perspectives, blending scientific rigor with a user-focused mindset. I am committed to continuous learning and staying up-to-date with the latest technologies to deliver high-quality, impactful projects.
+When I'm not coding or exploring new tech trends, I enjoy sharing knowledge through teaching and collaborating with others to foster innovation.
+    </p>
+    <div class="tech-icons">
+      <img src="icons/html.svg" alt="HTML" />
+      <img src="icons/css.svg" alt="CSS" />
+      <img src="icons/js.svg" alt="JavaScript" />
+      <img src="icons/react.svg" alt="React" />
+      <img src="icons/nodejs.svg" alt="Node.js" />
+    </div>
+  </section>
+
+  <section id="projects" class="section container">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-image">[Image]</div>
+        <h3>Project One</h3>
+        <p>A short description of the project.</p>
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+      </div>
+      <div class="project-card">
+        <div class="project-image">[Image]</div>
+        <h3>Project Two</h3>
+        <p>A short description of the project.</p>
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+      </div>
+      <div class="project-card">
+        <div class="project-image">[Image]</div>
+        <h3>Project Three</h3>
+        <p>A short description of the project.</p>
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer container">
+    <p>&copy; 2025 David García</p>
+  </footer>
+</body>
+</html>
