@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David García - Full Stack Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Portfolio profesional de David García, desarrollador fullstack especializado en HTML, CSS, JavaScript y más.">
+  <meta name="keywords" content="portfolio, desarrollador web, fullstack, HTML, CSS, JavaScript, GitHub">
+  <meta name="author" content="David García">
+  <meta property="og:title" content="David García | Desarrollador Fullstack" />
+  <meta property="og:description" content="Conoce mis proyectos, experiencia y cómo puedo ayudarte con soluciones web modernas." />
+  <meta property="og:url" content="https://deika79.github.io/Portfolio/" />
+  <meta property="og:type" content="website" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">David García</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./projects.html">Projects</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container contact-page" id="contact">
+    <h2>Contacto</h2>
+
+    <div class="contact-info">
+      <div>
+        <p><strong>Nombre:</strong> David García</p>
+        <p><strong>Teléfono:</strong> <a href="tel:+34628247900">+34 628 247 900</a></p>
+        <a class="btn-primary call-button" href="tel:+34628247900">Llamar ahora</a>
+        <p><strong>Correo:</strong> <a href="mailto:d.garcia@colegioarula.com">d.garcia@colegioarula.com</a></p>
+
+        <div class="social-icons">
+          <a href="https://linkedin.com/in/juanperez" target="_blank" rel="noopener noreferrer">
+            <img src="./icons/linkedin-logo-linkedin-icon-transparent-free-png.webp" alt="LinkedIn">
+          </a>
+          <a href="https://github.com/Deika79" target="_blank" rel="noopener noreferrer">
+            <img src="./icons/25231.png" alt="GitHub">
+          </a>
+          <a href="https://twitter.com/juanperez" target="_blank" rel="noopener noreferrer">
+            <img src="./icons/Instagram_logo_2022.svg.webp" alt="Twitter">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <form action="https://formspree.io/f/mayvodgy" method="POST">
+        <label>
+          Nombre:
+          <input type="text" name="nombre" required>
+        </label>
+        <label>
+          Email:
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          Mensaje:
+          <textarea name="mensaje" rows="5" required></textarea>
+        </label>
+        <button class="btn-primary" type="submit">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer container">
+    <p>&copy; 2025 David García</p>
+  </footer>
+
+  <script>
+    window.addEventListener("scroll", function () {
+      const navbar = document.querySelector(".navbar");
+      if (window.scrollY > 20) {
+        navbar.classList.add("sticky");
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    });
+  </script>
+
+</body>
+</html>
