@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David García - Full Stack Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Portfolio profesional de David García, desarrollador fullstack especializado en HTML, CSS, JavaScript y más.">
+  <meta name="keywords" content="portfolio, desarrollador web, fullstack, HTML, CSS, JavaScript, GitHub">
+  <meta name="author" content="David García ">
+  <meta property="og:title" content="David García | Desarrollador Fullstack" />
+  <meta property="og:description" content="Conoce mis proyectos, experiencia y cómo puedo ayudarte con soluciones web modernas." />
+  <!--<meta property="og:image" content="https://diseñodavidgarcía.com/imagen-preview.png" />/>-->
+  <meta property="og:url" content="https://deika79.github.io/Portfolio/" />
+  <meta property="og:type" content="website" />
+</head>
+<script>
+  window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".navbar");
+    if (window.scrollY > 20) {
+      navbar.classList.add("sticky");
+    } else {
+      navbar.classList.remove("sticky");
+    }
+  });
+</script>
+
+<body>
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">David García</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./projects.html">Projects</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+<section class="about-section">
+  <div class="container">
+    <h2>About Me</h2>
+    <p>
+      I’m a full stack designer with a passion for crafting intuitive and visually appealing websites.
+      I excel at turning complex problems into elegant, user-friendly solutions, and I’m dedicated to
+      continuous learning and adaptation in the ever-evolving landscape of web technologies.
+    </p>
+
+    <h3>Technologies I Work With</h3>
+    <div class="tech-icons">
+  <div class="tech-item">
+    <img src="./icons/react-512.webp" alt="React" />
+    <span>React</span>
+  </div>
+  <div class="tech-item">
+    <img src="./icons/nodejs-1-logo-png-transparent.png" alt="Node.js" />
+    <span>Node.js</span>
+  </div>
+  <div class="tech-item">
+    <img src="./icons/5968267.png" alt="HTML" />
+    <span>HTML</span>
+  </div>
+  <div class="tech-item">
+    <img src="./icons/919826.png" alt="CSS" />
+    <span>CSS</span>
+  </div>
+  <div class="tech-item">
+    <img src="./icons/mongodb-icon-logo-png_seeklogo-503274.png" alt="MongoDB" />
+    <span>MongoDB</span>
+  </div>
+  <div class="tech-item">
+    <img src="./icons/mysql.png" alt="MySql" />
+    <span>MySql</span>
+  </div>
+  <div class="tech-item">
+    <img src="./icons/vuejs-original-wordmark-icon-1736x2048-4z2z3y92.png" alt="Vue" />
+    <span>Vue</span>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<section id="experience" class="section">
+  <div class="container">
+    <h2>Experience</h2>
+    <div class="experience-item">
+      <span class="company-tag">TechNova Inc.</span>
+    <span class="year-range">2017 – 2020</span>
+    <h3>Frontend Developer</h3>
+    <p>Created dynamic interfaces using modern frameworks and collaborated closely with UX teams to enhance usability and accessibility.</p>
+    <div class="experience-item">
+    <span class="company-tag">Startup Labs</span>
+    <span class="year-range">2015 – 2017</span>
+    <h3>Junior Developer</h3>
+    <p>Assisted in building MVPs for early-stage products and gained hands-on experience with agile development practices and version control.</p>
+  </div>
+  </div>
+</section>
+
+<section id="education" class="section">
+  <div class="container">
+    <h2>Education</h2>
+    <div class="education-item">
+      <h3>MSc in Web Engineering</h3>
+    <p>University of Technology</p>
+    <span class="year-range">2018 – 2020</span>
+  </div>
+
+  <div class="education-item">
+    <h3>JavaScript Mastery Bootcamp</h3>
+    <p>Code Academy</p>
+    <span class="year-range">2021</span>
+    </div>
+  </div>
+</section>
+
+<footer class="footer container">
+    <p>&copy; 2025 David García</p>
+  </footer>
+</body>
+</html>
