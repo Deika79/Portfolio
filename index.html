@@ -15,6 +15,183 @@
   <meta property="og:type" content="website" />
   <link rel="icon" href="./icons/icons8-administrator-male-64.png" type="image/x-icon" />
 </head>
+<!-- ===== Banner de Cookies (HTML + CSS + JS en un solo bloque) ===== -->
+<style>
+  .cookie-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,.4);
+    display: none; z-index: 9998;
+  }
+  .cookie-banner {
+    position: fixed; left: 1rem; right: 1rem; bottom: 1rem;
+    background: #fff; color: #111; padding: 1rem; border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2); z-index: 9999;
+    max-width: 920px; margin: 0 auto; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  .cookie-hidden { display: none; }
+  .cookie-title { font-size: 1.1rem; font-weight: 700; margin: 0 0 .25rem 0; }
+  .cookie-text { margin: 0 0 .75rem 0; line-height: 1.45; font-size: .95rem; }
+  .cookie-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .cookie-btn {
+    border: 1px solid #ddd; background: #f6f6f6; padding: .6rem .9rem; border-radius: 10px; cursor: pointer;
+  }
+  .cookie-btn.primary { background: #111; color: #fff; border-color: #111; }
+  .cookie-btn.link { background: transparent; border: none; text-decoration: underline; padding-left: 0; }
+  .cookie-modal {
+    position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    background: #fff; color: #111; width: min(600px, 92vw); padding: 1rem; border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10000; display: none;
+  }
+  .cookie-modal h3 { margin: 0 0 .5rem 0; }
+  .cookie-list { margin: .5rem 0 1rem 0; padding-left: 0; list-style: none; }
+  .cookie-item { display: flex; justify-content: space-between; align-items: center; padding: .5rem 0; border-top: 1px solid #eee; }
+  .cookie-item:first-child { border-top: none; }
+  .cookie-item label { font-weight: 600; }
+  .cookie-switch { transform: scale(1.15); }
+  .cookie-footer { display: flex; gap: .5rem; justify-content: flex-end; }
+  .cookie-small { font-size: .85rem; opacity: .9; }
+  @media (prefers-reduced-motion: no-preference) {
+    .cookie-banner { animation: slideUp .25s ease-out; }
+    @keyframes slideUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  }
+</style>
+
+<div class="cookie-backdrop" id="cookieBackdrop" aria-hidden="true"></div>
+
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-modal="true" aria-labelledby="cookieTitle">
+  <div class="cookie-title" id="cookieTitle">Usamos cookies 🍪</div>
+  <p class="cookie-text">
+    Utilizamos cookies <strong>necesarias</strong> para que la web funcione y opcionales para <strong>analítica</strong> y <strong>marketing</strong>. 
+    Puedes aceptar todo, rechazar lo no esencial o configurar tus preferencias. 
+    Consulta la <a href="privacidad.html" target="_blank" rel="noopener">Política de privacidad</a>.
+  </p>
+  <div class="cookie-actions">
+    <button class="cookie-btn" id="btnReject">Rechazar</button>
+    <button class="cookie-btn" id="btnCustomize">Configurar</button>
+    <button class="cookie-btn primary" id="btnAcceptAll">Aceptar todo</button>
+  </div>
+</div>
+
+<div class="cookie-modal" id="cookieModal" role="dialog" aria-modal="true" aria-labelledby="cookieModalTitle" aria-describedby="cookieModalDesc">
+  <h3 id="cookieModalTitle">Preferencias de cookies</h3>
+  <p class="cookie-small" id="cookieModalDesc">Elige qué categorías quieres permitir. Las cookies necesarias no se pueden desactivar.</p>
+  <ul class="cookie-list">
+    <li class="cookie-item">
+      <div>
+        <label>Necesarias</label>
+        <div class="cookie-small">Imprescindibles para el funcionamiento básico del sitio.</div>
+      </div>
+      <input type="checkbox" class="cookie-switch" checked disabled>
+    </li>
+    <li class="cookie-item">
+      <div>
+        <label for="ckAnalytics">Analíticas</label>
+        <div class="cookie-small">Nos ayudan a entender el uso (medición anónima).</div>
+      </div>
+      <input type="checkbox" id="ckAnalytics" class="cookie-switch">
+    </li>
+    <li class="cookie-item">
+      <div>
+        <label for="ckMarketing">Marketing</label>
+        <div class="cookie-small">Contenido y anuncios personalizados.</div>
+      </div>
+      <input type="checkbox" id="ckMarketing" class="cookie-switch">
+    </li>
+  </ul>
+  <div class="cookie-footer">
+    <button class="cookie-btn" id="btnCancelPrefs">Cancelar</button>
+    <button class="cookie-btn" id="btnSavePrefs">Guardar selección</button>
+  </div>
+</div>
+
+<script>
+  // —— Utilidad de consentimiento —— //
+  const KEY = 'cookieConsent';
+  const $banner = document.getElementById('cookieBanner');
+  const $modal = document.getElementById('cookieModal');
+  const $backdrop = document.getElementById('cookieBackdrop');
+  const $ckAnalytics = document.getElementById('ckAnalytics');
+  const $ckMarketing = document.getElementById('ckMarketing');
+
+  function getConsent() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch { return null; }
+  }
+  function setConsent(value) {
+    localStorage.setItem(KEY, JSON.stringify({ ...value, date: new Date().toISOString() }));
+  }
+  function showBanner(show=true){ $banner.classList.toggle('cookie-hidden', !show); }
+  function showModal(show=true){
+    $modal.style.display = show ? 'block' : 'none';
+    $backdrop.style.display = show ? 'block' : 'none';
+    $backdrop.setAttribute('aria-hidden', show ? 'false' : 'true');
+  }
+
+  // —— Carga condicional de scripts (ejemplo/placeholder) —— //
+  function loadAnalytics(){
+    // Ejemplo: Cargar un script solo si hay consentimiento
+    // const s = document.createElement('script');
+    // s.src = '/js/mi-analitica.js'; // tu script local o de proveedor si procede
+    // s.defer = true;
+    // document.head.appendChild(s);
+    console.log('[cookies] Analíticas habilitadas');
+  }
+  function disableAnalytics(){
+    // Aquí podrías desactivar trackers si aplicase.
+    console.log('[cookies] Analíticas deshabilitadas');
+  }
+
+  // —— Inicialización —— //
+  (function initCookieConsent(){
+    const consent = getConsent();
+    if (!consent) {
+      showBanner(true);
+    } else {
+      if (consent.analytics) loadAnalytics(); else disableAnalytics();
+    }
+  })();
+
+  // —— Listeners —— //
+  document.getElementById('btnAcceptAll').addEventListener('click', () => {
+    setConsent({ necessary: true, analytics: true, marketing: true });
+    loadAnalytics();
+    showBanner(false); showModal(false);
+  });
+
+  document.getElementById('btnReject').addEventListener('click', () => {
+    setConsent({ necessary: true, analytics: false, marketing: false });
+    disableAnalytics();
+    showBanner(false); showModal(false);
+  });
+
+  document.getElementById('btnCustomize').addEventListener('click', () => {
+    const existing = getConsent();
+    $ckAnalytics.checked = !!(existing && existing.analytics);
+    $ckMarketing.checked = !!(existing && existing.marketing);
+    showModal(true);
+  });
+
+  document.getElementById('btnCancelPrefs').addEventListener('click', () => showModal(false));
+
+  document.getElementById('btnSavePrefs').addEventListener('click', () => {
+    const consent = { necessary: true, analytics: $ckAnalytics.checked, marketing: $ckMarketing.checked };
+    setConsent(consent);
+    consent.analytics ? loadAnalytics() : disableAnalytics();
+    showBanner(false); showModal(false);
+  });
+
+  // Accesibilidad básica: cerrar modal con Escape y clic en fondo
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') showModal(false); });
+  $backdrop.addEventListener('click', () => showModal(false));
+
+  // Opción: exponer una función global para "Gestionar cookies" desde el footer
+  window.openCookiePreferences = function(){
+    const existing = getConsent();
+    $ckAnalytics.checked = !!(existing && existing.analytics);
+    $ckMarketing.checked = !!(existing && existing.marketing);
+    showModal(true);
+  }
+</script>
+<!-- ===== Fin banner de cookies ===== -->
+
 <body>
   <header class="navbar">
     <div class="container">
@@ -116,6 +293,8 @@
 
   <footer class="footer container">
     <p>&copy; 2025 David García</p>
+    <a href="#" onclick="openCookiePreferences(); return false;">Gestionar cookies</a>
+
   </footer>
 
   <!-- Scripts -->
